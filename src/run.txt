@@ -1,0 +1,5 @@
+1. Create a new virtual environment using `conda create -n <env_name> python=3.10`, and enter answers for the prompts as required.
+2. conda activate <env_name>
+3. pip install -U scikit-learn
+4. pip install opensmile
+5. pip install mat4py matplotlib seaborn
