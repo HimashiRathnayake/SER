@@ -34,6 +34,24 @@ def load_RAVDESS_speech_corpus_with_random_testset(test_size=0.25):
     X_train, X_test, y_train, y_test = train_test_split(np.array(X), y, test_size=test_size, random_state=7)
     return X_train, X_test, y_train, y_test, encoder.categories_
 
+def load_RAVDESS_speech_corpus_with_speaker_based_testset():
+    X_train, X_test, y_train, y_test = [], [], [], []
+    for file in glob.glob(RAVDESS_speech_corpus_path):
+        basename = os.path.basename(file)
+        speaker = basename.split("-")[6].split(".")[0]
+        emotion = basename.split("-")[2]
+        features = extract_feature(file)
+        if int(speaker) <= 6:
+            X_test.append(features)
+            y_test.append(emotion)
+        else:
+            X_train.append(features)
+            y_train.append(emotion)
+    encoder = OrdinalEncoder()
+    y_train = encoder.fit_transform(np.array(y_train).reshape(-1, 1))
+    y_test = encoder.transform(np.array(y_test).reshape(-1, 1))
+    return X_train, X_test, y_train, y_test, encoder.categories_
+
 def load_jl_corpus_with_random_testset(test_size=0.25):
     X, y = [], []
     for file in glob.glob(JL_corpus_path):

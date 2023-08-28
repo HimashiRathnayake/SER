@@ -1,5 +1,5 @@
 from utils.classifier import load_classifier 
-from utils.data_handler import load_Sindhi_data, load_jl_corpus_with_random_testset, get_jl_corpus_statistics, load_jl_corpus_with_speaker_based_testset, load_RAVDESS_speech_corpus_with_random_testset
+from utils.data_handler import load_Sindhi_data, load_jl_corpus_with_random_testset, get_jl_corpus_statistics, load_jl_corpus_with_speaker_based_testset, load_RAVDESS_speech_corpus_with_random_testset, load_RAVDESS_speech_corpus_with_speaker_based_testset
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import seaborn as sns
 
 # get_jl_corpus_statistics()
 
-X_train, X_test, y_train, y_test, emotion_categories = load_RAVDESS_speech_corpus_with_random_testset()
+X_train, X_test, y_train, y_test, emotion_categories = load_RAVDESS_speech_corpus_with_speaker_based_testset()
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
